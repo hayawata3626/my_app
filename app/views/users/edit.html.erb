@@ -1,0 +1,11 @@
+<%= form_tag("/users/#{@user.id}/update", {multipart:true}) do %>
+  <label for='title'>ユーザー名</label>
+  <p><input type='text' name="name" value="<%= @user.name %>"></p>
+  <label for='content'>メールアドレス</label>
+  <p><textarea name='email' id='' cols='30' rows='10'>
+    <%= @user.email %>
+  </textarea></p>
+  <p><input type='file' name="image"></p>
+  <input type="submit" value="保存">
+<% end %>
+<%= link_to "戻る", root_path %>

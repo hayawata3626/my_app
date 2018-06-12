@@ -1,0 +1,36 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 10px 0;
+  background: #323232;
+  &_menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .user_info {
+      display: flex;
+      align-items: center;
+    }
+    .login_menu {
+      display: flex;
+      justify-content: space-between;
+      > li {
+        padding: 0 7px;
+        > a {
+          text-decoration: none;
+          color:#fff; 
+        }
+      }
+     }
+    .user_img {
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 50%;
+      background: #fff;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<header class="header" id="header">
+  <div class="header_menu">
+    <% if @current_user %>
+      <div class='user_info'>
+        <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+        <p class="user_img"><%= image_tag "/images/user_images/#{@current_user.image_name}" %></p>
+      </div>
+      <ul class="login_menu">
+        <li><%= link_to "新規登録", posts_new_path %></li>
+        <li><%= link_to("ユーザー一覧", "/users/index") %></li>
+        <li><%= link_to("投稿一覧", root_path)%></li>
+        <li><%= link_to("ログアウト", "/logout", {method: :post})%></li>
+      </ul>
+    <% else %>
+      <li><%= link_to("新規登録", "/signup") %></li>
+      <li><%= link_to("ユーザログイン", "/login") %></li>
+    <% end %>
+  </div>
+  <header-component></header-component>
+</header>

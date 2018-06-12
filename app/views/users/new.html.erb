@@ -1,0 +1,15 @@
+<p>ユーザー名</p>
+<% @user.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+ <% end %>
+<%= form_tag("/users/create") do %>
+  <input type="text" name="name">
+  <p>メールアドレス</p>
+  <p><input type="text" name="email"></p>
+  <p><input type="file" name="image"></p>
+  <p><input type="password" name="password" value="<%= @user.password %>"></p>
+  <input type="submit" value="新規登録">
+<% end %>
+<%= link_to "戻る", root_path %>
