@@ -1,41 +1,15 @@
-<div id="userProfile">
-  <% if flash[:notice] %>
-    <p><%= flash[:notice] %></p>
-  <% end %>
-  <div class="user_profile">
-    <p class="user_profile_img"><%= image_tag "/images/user_images/#{@user.image_name}" %></p>
-    <p class="user_profile_name"><%= @user.name %></p>
-    <p class="user_profile_email"><%= @user.email %></p>
-  </div>
-  <% if @user.id == @current_user.id %>
-    <%= link_to("編集", "/users/#{@user.id}/edit") %>
-  <% end %>
-
-  <% @user.posts.each do |post|%>
-    <div class="posts-index-item">
-      <div class="post-left">
-        <img src="<%= "/images/user_images/#{post.user.image_name}" %>">
-      </div>
-      <div class="post-right">
-        <div class="post-user-name">
-          <%= link_to(post.user.name, "/users/#{post.user.id}") %>
-        </div>
-        <%= link_to(post.content, "/posts/#{post.id}") %>
-      </div>
-    </div>
-  <% end %>
-
-  <%= link_to "戻る", users_index_path %>
-  <user-profile-component></user-profile-component>
+<div id="fuga">
+  <user-profile-component :user="user"></user-profile-component>
 </div>
-
 <%= javascript_include_tag "/javascripts/viewmodel/users/show" %>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js">
-
-  new Vue({
-    el: "#userProfile",
-
+<script>
+  new UserProfile({
+    el: "#fuga",
+    data: {
+      user: <%= raw @user.to_json %>
+    }
   })
 </script>
+
+
 
