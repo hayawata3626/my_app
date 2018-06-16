@@ -1,15 +1,28 @@
 <template>
   <div class='wrapper'>
-    <p class="postTitle">
-      <input type='text' placeholder="タイトル" class="postTitleField">
-    </p>
-    <div class="markdownArea">
-      <textarea class="markdownEditor" v-model="source"></textarea>
-      <div class='vue-markdown-wrapper'>
-        <vue-markdown :source="source"></vue-markdown>
+    <form action='/posts' method="post">
+      <p class="postTitle">
+        <input
+          type='text'
+          placeholder="タイトル"
+          class="postTitleField"
+          v-model="post.title"
+          name="post[title]"
+          >
+      </p>
+      <div class="markdownArea">
+        <textarea
+          class="markdownEditor"
+          v-model="source"
+          @input="insertText($event.target.value)"
+          name="post[content]"
+          ></textarea>
+        <div class='vue-markdown-wrapper'>
+          <vue-markdown :source="source"></vue-markdown>
+        </div>
       </div>
-    </div>
-    <button class="releaseBtn">公開する</button>
+      <button class="releaseBtn">公開する</button>
+    </form>
    </div>
 </template>
 
@@ -23,7 +36,14 @@ import VueMarkdown from 'vue-markdown';
   }
 })
 export default class New extends Vue {
+  @Prop()
+  public post: any;
+
   public source: any = "";
+
+  public insertText(text: string) {
+    this.post.content = text;
+  }
 
 }
 

@@ -1,5 +1,14 @@
 <div class="postNew">
-  <new-component></new-component>
+  <new-component :post="post"></new-component>
 </div>
 
 <%= javascript_include_tag "/javascripts/viewmodel/posts/new" %>
+
+<script>
+new PostNew({
+  el: '.postNew',
+  data:{
+    post: <%= raw @post.to_json %>
+  }
+})
+</script>

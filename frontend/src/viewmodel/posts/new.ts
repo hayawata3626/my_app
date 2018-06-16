@@ -11,6 +11,4 @@ export default class PostNew extends Vue {
 
 }
 
-new PostNew({
-  el: '.postNew'
-})
+(<any>window).PostNew = PostNew;

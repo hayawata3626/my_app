@@ -1,6 +1,6 @@
 <div id='main'>
   <ul>
-    <user-list :user="user" v-for="user in users"></user-list>
+    <user-list :user="user" v-for="(user, index) in users" key="index"></user-list>
   </ul>
 </div>
 <%= javascript_include_tag "/javascripts/viewmodel/users/index" %>
