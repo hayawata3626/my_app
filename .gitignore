@@ -21,8 +21,8 @@
 /storage/*
 
 /node_modules
-/dist
 /yarn-error.log
+dist/
 
 /public/assets
 .byebug_history
