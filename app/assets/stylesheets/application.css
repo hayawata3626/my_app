@@ -13,10 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ @import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
 
  body, html, p, ul, li {
    margin: 0;
    padding: 0;
+   font-family : 'Noto Sans JP', sans-serif;
  }
 
  li {
@@ -29,5 +31,6 @@
 
  .container {
    margin-top: 100px;
+   padding: 0 10vw;
  }
 

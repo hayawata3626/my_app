@@ -21,6 +21,13 @@
   }
 }
 
+.postNew {
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+}
+
 .newPost {
   label {
     display: block;
