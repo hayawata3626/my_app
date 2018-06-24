@@ -1,24 +1,16 @@
-<div class="main users-new">
-  <div class="container">
-    <div class="form-heading">ログイン</div>
-    <div class="form users-form">
-      <div class="form-body">
-        <!-- 指定されたHTMLを貼り付けてください -->
-        <% if @error_message %>
-          <div class="form-error">
-            <%= @error_message %>
-          </div>
-        <% end %>
-        <%= form_tag("/login") do %>
-          <p>メールアドレス</p>
-          <!-- value属性を追加してください -->
-          <input name="email" value="<%= @email %>">
-          <p>パスワード</p>
-          <!-- value属性を追加してください -->
-          <input type="password" name="password" value="<%= @password %>">
-          <input type="submit" value="ログイン">
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="main users-new" id="LoginForm">
+  <login-component :email="email" :password="password"></login-component>
 </div>
+<%= javascript_include_tag "/javascripts/viewmodel/users/login" %>
+
+
+<script>
+new Login({
+  el: '#LoginForm',
+  data:{
+    error_message: '<% @error_message %>',
+    email: '<% @email %>',
+    password: '<% @password %>'
+  }
+})
+</script>
