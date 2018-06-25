@@ -17,6 +17,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pry'
 gem 'mysql2'
+gem 'hirb'
+gem 'hirb-unicode'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
