@@ -33,6 +33,7 @@ export default class LoginForm extends Vue {
 
   @Prop()
   public password: string;
+
 }
 </script>
 

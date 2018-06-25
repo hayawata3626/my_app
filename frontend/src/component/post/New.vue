@@ -18,7 +18,7 @@
           name="post[content]"
           ></textarea>
         <div class='vue-markdown-wrapper'>
-          <vue-markdown :source="source"></vue-markdown>
+          <vue-markdown :source="source" :emoji="true" :html="true" :typographer="true"></vue-markdown>
         </div>
       </div>
       <button class="releaseBtn">公開する</button>
@@ -35,6 +35,7 @@ import VueMarkdown from 'vue-markdown';
     "vue-markdown":VueMarkdown
   }
 })
+
 export default class New extends Vue {
   @Prop()
   public post: any;
@@ -50,7 +51,17 @@ export default class New extends Vue {
 </script>
 
 
-<style scoped>
+<style>
+
+code {
+  font-size: 90%;
+  margin: 0 2px;
+  padding: 0 5px;
+  border: 1px solid rgba(0,0,0,.08);
+  background-color: rgba(131, 109, 109, 0.03);
+  border-radius: 3px;
+}
+
 .wrapper {
   padding: 30px;
 }
@@ -85,5 +96,14 @@ export default class New extends Vue {
   margin-top: 20px;
   font-size: 15px;
   font-family: "Meiryo";
+}
+
+.vue-markdown-wrapper h1 {
+  border-bottom: 1px solid gainsboro;
+}
+
+.language-javascript {
+  background: #3F3F3F;
+  color:#fff;
 }
 </style>

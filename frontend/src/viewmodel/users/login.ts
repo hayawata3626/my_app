@@ -8,9 +8,6 @@ import LoginForm  from "../../component/users/Login.vue";
 })
 
 export default class Login extends Vue {
- 
-
 }
-
 
 (<any>window).Login = Login;

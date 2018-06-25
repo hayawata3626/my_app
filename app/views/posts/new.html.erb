@@ -1,3 +1,9 @@
+<% @post.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+<% end %>
+
 <div class="postNew">
   <new-component :post="post"></new-component>
 </div>
