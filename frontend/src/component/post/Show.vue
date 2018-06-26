@@ -1,5 +1,6 @@
 <template>
   <div class='postShow'>
+    <h1 class="post_title">{{post.title}}</h1>
     <vue-markdown :source="post.content" :emoji="true" :html="true" :typographer="true"></vue-markdown>
   </div>
 </template>
@@ -18,15 +19,22 @@ export default class Show extends Vue {
   public post: any;
 
   public source: any = "";
-
 }
 </script>
 
 <style>
-.language-javascript {
+/* .language-javascript {
   background: #3F3F3F;
   color:#fff;
   padding: 10px;
+} */
+
+.postShow .post_title {
+  border-bottom: 1px solid gray;
+}
+
+.post {
+  border:none;
 }
 </style>
 

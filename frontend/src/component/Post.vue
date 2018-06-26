@@ -16,7 +16,7 @@
         </a>
       </p>
       <p class="post_operate_edit">
-        <a :href="'posts/' + post.id+ 'edit'">
+        <a :href="'posts/' + post.id+ '/edit'">
           <i class="fas fa-pencil-alt f303"></i>
         </a>
       </p>

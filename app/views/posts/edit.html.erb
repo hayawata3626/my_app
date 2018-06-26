@@ -1,12 +1,13 @@
-<%= form_tag("/posts/#{@post.id}/update") do %>
-  <label for='title'>タイトル</label>
-  <p><input type='text' name="title" value="<%= @post.title %>"></p>
-  <label for='content'>内容</label>
-  <p>
-    <textarea name='content' rows='10'>
-      <%= @post.content %>
-    </textarea>
-  </p>
-  <input type="submit" value="保存">
-<% end %>
-<%= link_to "戻る", root_path %>
+<div id="postEdit">
+  <edit-component :post="post"></edit-component>
+</div>
+<%= javascript_include_tag "/javascripts/viewmodel/posts/edit" %>
+
+<script>
+  new PostEdit ({
+    el: "#postEdit",
+    data: {
+      post: <%= raw @post.to_json %>
+    }
+  })
+</script>
