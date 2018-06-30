@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="postNew">
-  <new-component :post="post"></new-component>
+  <new-component :post="post" :authenticationToken="authenticationToken"></new-component>
 </div>
 
 <%= javascript_include_tag "/javascripts/viewmodel/posts/new" %>
@@ -14,7 +14,8 @@
 new PostNew({
   el: '.postNew',
   data:{
-    post: <%= raw @post.to_json %>
+    post: <%= raw @post.to_json %>,
+    authenticationToken: '<%= form_authenticity_token %>'
   }
 })
 </script>
