@@ -15,6 +15,10 @@
  */
  @import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
 
+* {
+  box-sizing: border-box;
+}
+
  body, html, p, ul, li {
    margin: 0;
    padding: 0;
