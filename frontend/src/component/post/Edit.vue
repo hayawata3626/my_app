@@ -17,7 +17,7 @@
           @input="insertText($event.target.value)"
           name="post[content]"
           ></textarea>
-        <div class='vue-markdown-wrapper'>
+        <div class='vue-markdown-wrapper' id="markdownPreview">
           <vue-markdown :source="source" :emoji="true" :html="true" :typographer="true"></vue-markdown>
         </div>
       </div>
@@ -47,13 +47,25 @@ export default class Edit extends Vue {
 
   created() {
     hljs.initHighlightingOnLoad();
-    // console.log(hljs, "createde");
+  }
+
+  updated() {
+    this.applyCodeHilight();
+  }
+
+  public applyCodeHilight() {
+    const pres = document.getElementsByTagName("pre");
+    this.getTagNames(pres);
+  }
+
+  public getTagNames(tags){
+    for(let i = 0; i < tags.length; i++) {
+      hljs.highlightBlock(tags[i]);
+    }
   }
 
 }
 </script>
-
-
 <style>
 
 .container {
@@ -96,7 +108,6 @@ code {
   font-size: 16px;
   padding: 10px;
   overflow: scroll;
-  /* min-height: 72vh; */
 }
 
 .releaseBtn {
@@ -115,8 +126,4 @@ code {
   border-bottom: 1px solid gainsboro;
 }
 
-.language-javascript {
-  background: #3F3F3F;
-  color:#fff;
-}
 </style>

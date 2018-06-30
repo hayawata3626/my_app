@@ -1,6 +1,7 @@
 <template>
   <div class='wrapper'>
     <form action='/posts' method="post">
+    <input name="authenticity_token" type="hidden" :value="authenticationToken">
       <p class="postTitle">
         <input
           type='text'
@@ -29,16 +30,18 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import VueMarkdown from 'vue-markdown';
+import VueMarkdown from "vue-markdown";
+import * as hljs from "highlight.js";
+
 @Component({
   components: {
-    "vue-markdown":VueMarkdown
+    "vue-markdown": VueMarkdown
   }
 })
-
 export default class New extends Vue {
-  @Prop()
-  public post: any;
+  @Prop() public post: any;
+
+  @Prop() public authenticationToken: string;
 
   public source: any = "";
 
@@ -46,24 +49,40 @@ export default class New extends Vue {
     this.post.content = text;
   }
 
-}
+  created() {
+    hljs.initHighlightingOnLoad();
+  }
 
+  updated() {
+    this.applyCodeHilight();
+  }
+
+  public applyCodeHilight() {
+    const pres = document.getElementsByTagName("pre");
+    this.getTagNames(pres);
+  }
+
+  public getTagNames(tags){
+    for(let i = 0; i < tags.length; i++) {
+      hljs.highlightBlock(tags[i]);
+    }
+  }
+}
 </script>
 
 
 <style>
-
 code {
   font-size: 90%;
   margin: 0 2px;
   padding: 0 5px;
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background-color: rgba(131, 109, 109, 0.03);
   border-radius: 3px;
 }
 
 .wrapper {
-  padding: 30px;
+  padding: 10px 30px;
 }
 
 .postTitleField {
@@ -74,16 +93,23 @@ code {
 }
 
 .markdownArea {
-  width: 100vw;
+  width: 100%;
   justify-content: space-between;
   display: flex;
+  height: 63vh;
 }
 
-.vue-markdown-wrapper, .markdownEditor {
-  width: 48vw;
+.vue-markdown-wrapper,
+.markdownEditor {
+  width: 48%;
   font-size: 16px;
   padding: 10px;
-  min-height: 72vh;
+  height: 100%;
+  overflow:scroll;
+}
+
+.vue-markdown-wrapper, {
+  padding: 0;
 }
 
 .releaseBtn {
@@ -102,8 +128,8 @@ code {
   border-bottom: 1px solid gainsboro;
 }
 
-.language-javascript {
-  background: #3F3F3F;
-  color:#fff;
+pre {
+  margin: 0;
 }
+
 </style>

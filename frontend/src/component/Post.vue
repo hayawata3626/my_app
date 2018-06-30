@@ -21,7 +21,7 @@
         </a>
       </p>
       <p class="post_operate_delete">
-        <a :href="'posts/' + post.id + 'destroy'">
+        <a :href="'posts/' + post.id + '/destroy'">
           <i class="far fa-trash-alt"></i>
         </a>
       </p>
