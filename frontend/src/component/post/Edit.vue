@@ -1,5 +1,5 @@
 <template>
-  <div class='wrapper'>
+  <div class='wrapper postEdit'>
     <form action='/posts' method="post">
       <p class="postTitle">
         <input
@@ -29,11 +29,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import VueMarkdown from "vue-markdown";
+import * as hljs from "highlight.js";
 
 @Component({
   components: {
     "vue-markdown": VueMarkdown
-  }
+  },
 })
 export default class Edit extends Vue {
   @Prop() public post: any;
@@ -44,11 +45,24 @@ export default class Edit extends Vue {
     this.post.content = text;
   }
 
+  created() {
+    hljs.initHighlightingOnLoad();
+    // console.log(hljs, "createde");
+  }
+
 }
 </script>
 
 
 <style>
+
+.container {
+  padding: 0;
+}
+
+.postEdit .markdownArea {
+  width: 100%;
+}
 
 code {
   font-size: 90%;
@@ -74,13 +88,15 @@ code {
   width: 100vw;
   justify-content: space-between;
   display: flex;
+  height: 64vh;
 }
 
 .vue-markdown-wrapper, .markdownEditor {
   width: 48vw;
   font-size: 16px;
   padding: 10px;
-  min-height: 72vh;
+  overflow: scroll;
+  /* min-height: 72vh; */
 }
 
 .releaseBtn {

@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import VueMarkdown from 'vue-markdown';
+import * as hljs from "highlight.js";
 
 @Component({
   components: {
@@ -19,16 +20,14 @@ export default class Show extends Vue {
   public post: any;
 
   public source: any = "";
+
+  created() {
+    hljs.initHighlightingOnLoad();
+  }
 }
 </script>
 
 <style>
-/* .language-javascript {
-  background: #3F3F3F;
-  color:#fff;
-  padding: 10px;
-} */
-
 .postShow .post_title {
   border-bottom: 1px solid gray;
 }
