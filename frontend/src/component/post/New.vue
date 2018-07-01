@@ -1,7 +1,10 @@
 <template>
   <div class='wrapper'>
     <form action='/posts' method="post">
-    <input name="authenticity_token" type="hidden" :value="authenticationToken">
+    <input
+      name="authenticity_token"
+      type="hidden"
+      :value="authenticationToken">
       <p class="postTitle">
         <input
           type='text'
@@ -32,6 +35,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import VueMarkdown from "vue-markdown";
 import * as hljs from "highlight.js";
+import axios from "axios";
 
 @Component({
   components: {
@@ -67,6 +71,11 @@ export default class New extends Vue {
       hljs.highlightBlock(tags[i]);
     }
   }
+
+  public sendData(){
+    
+  }
+
 }
 </script>
 
@@ -126,10 +135,6 @@ code {
 
 .vue-markdown-wrapper h1 {
   border-bottom: 1px solid gainsboro;
-}
-
-pre {
-  margin: 0;
 }
 
 </style>

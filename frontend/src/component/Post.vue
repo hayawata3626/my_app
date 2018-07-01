@@ -4,7 +4,7 @@
       <p class="post_userImage"><img src='/images/user_images/default_user.png' alt=''></p>
       <ul class="post_userInfo">
         <li class="post_userInfo_name">ほげほげ</li>
-        <li class="post_userInfo_date">{{post.created_at}}</li>
+        <li class="post_userInfo_date">{{date}}</li>
       </ul>
     </div>
     <div class='post_title'>{{post.title}}</div>
@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import * as moment from "moment";
 
 @Component
 export default class Post extends Vue {
@@ -40,7 +41,15 @@ export default class Post extends Vue {
   @Prop()
   public users;
 
-  public shapeDateFormat(date: any) {
+  private date: string = null;
+
+  created(){
+    this.shapeDateFormat(this.post.created_at);
+  }
+
+  public shapeDateFormat(postDate) {
+    const nonformatDate = moment(postDate)
+    this.date = nonformatDate.format("YYYY/MM/DD HH:mm")
   }
 }
 
@@ -54,6 +63,12 @@ export default class Post extends Vue {
 
 .post {
   font-weight: lighter;
+}
+
+.post_title {
+  font-weight: bolder;
+  font-size: 22px;
+  margin-top: 10px;
 }
 .post_userInfo {
   margin-left: 10px;
@@ -69,8 +84,8 @@ export default class Post extends Vue {
 }
 
 .post_userImage {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: 1px solid #249f80;
   overflow: hidden;
@@ -91,7 +106,7 @@ export default class Post extends Vue {
 }
 
 .post_content {
-  width: 100px;
+  width: 80%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
