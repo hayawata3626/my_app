@@ -4,7 +4,7 @@
     <input
       name="authenticity_token"
       type="hidden"
-      :value="authenticationToken">
+      :value="token">
       <p class="postTitle">
         <input
           type='text'
@@ -45,7 +45,7 @@ import axios from "axios";
 export default class New extends Vue {
   @Prop() public post: any;
 
-  @Prop() public authenticationToken: string;
+  @Prop() public token: string;
 
   public source: any = "";
 
@@ -71,11 +71,6 @@ export default class New extends Vue {
       hljs.highlightBlock(tags[i]);
     }
   }
-
-  public sendData(){
-    
-  }
-
 }
 </script>
 

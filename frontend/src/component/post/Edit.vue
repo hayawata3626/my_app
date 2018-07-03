@@ -1,6 +1,10 @@
 <template>
   <div class='wrapper postEdit'>
     <form action='/posts' method="post">
+     <input
+      name="authenticity_token"
+      type="hidden"
+      :value="token">
       <p class="postTitle">
         <input
           type='text'
@@ -34,10 +38,12 @@ import * as hljs from "highlight.js";
 @Component({
   components: {
     "vue-markdown": VueMarkdown
-  },
+  }
 })
 export default class Edit extends Vue {
   @Prop() public post: any;
+
+  @Prop() public token: string;
 
   public source: any = this.post.content;
 
@@ -58,16 +64,14 @@ export default class Edit extends Vue {
     this.getTagNames(pres);
   }
 
-  public getTagNames(tags){
-    for(let i = 0; i < tags.length; i++) {
+  public getTagNames(tags) {
+    for (let i = 0; i < tags.length; i++) {
       hljs.highlightBlock(tags[i]);
     }
   }
-
 }
 </script>
 <style>
-
 .container {
   padding: 0;
 }
@@ -80,7 +84,7 @@ code {
   font-size: 90%;
   margin: 0 2px;
   padding: 0 5px;
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background-color: rgba(131, 109, 109, 0.03);
   border-radius: 3px;
 }
@@ -103,7 +107,8 @@ code {
   height: 64vh;
 }
 
-.vue-markdown-wrapper, .markdownEditor {
+.vue-markdown-wrapper,
+.markdownEditor {
   width: 48vw;
   font-size: 16px;
   padding: 10px;
@@ -125,5 +130,4 @@ code {
 .vue-markdown-wrapper h1 {
   border-bottom: 1px solid gainsboro;
 }
-
 </style>
