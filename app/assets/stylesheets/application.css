@@ -13,28 +13,38 @@
  *= require_tree .
  *= require_self
  */
- @import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
 
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
 * {
   box-sizing: border-box;
 }
 
- body, html, p, ul, li {
-   margin: 0;
-   padding: 0;
-   font-family : 'Noto Sans JP', sans-serif;
- }
+body,
+html,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+}
 
- li {
-   list-style: none;
- }
+li {
+  list-style: none;
+}
 
- img {
-   width: 100%;
- }
+img {
+  width: 100%;
+}
 
- .container {
-   margin-top: 30px;
-   padding: 0 10vw;
- }
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+  outline: none;
+}
 
+.container {
+  margin-top: 30px;
+  padding: 0 10vw;
+}
