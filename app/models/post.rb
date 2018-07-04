@@ -12,5 +12,12 @@ class Post < ApplicationRecord
     return User.joins(:posts).select("users.name")
   end
 
+  def self.search(search)
+    if search
+      Post.where(['title like ?', "%#{search}%"])
+    else
+      Post.all
+    end
+  end
 
 end

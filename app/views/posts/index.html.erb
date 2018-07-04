@@ -4,6 +4,19 @@
     v-for="post in posts"
     key="post.id">
     </post-component>
+  <div v-if="!searchResult">
+    <p>検索条件に合う記事は見つかりません。</p>
+    <%= link_to "ブログトップへ", root_path %>
+  </div>
 </div>
-<%= javascript_include_tag "/javascripts/viewmodel/posts/index" %>
+
+<script>
+new Posts({
+  el: "#vuePosts",
+  data: {
+    posts: <%= raw @posts.to_json %>,
+    searchResult: <%= @searchResult %>
+  }
+})
+</script>
 

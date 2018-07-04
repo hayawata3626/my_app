@@ -1,11 +1,14 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
-  protect_from_forgery :except => [:create]
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
-  before_action :site_http_basic_authenticate_with, {only: [:edit, :destroy]}
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.search(params[:search])
+    if @posts.blank?
+      @searchResult = false;
+      return;
+    end
+    @searchResult = true
   end
 
   def show
@@ -56,9 +59,4 @@ class PostsController < ApplicationController
     render json: @posts
   end
 
-  def site_http_basic_authenticate_with
-    authenticate_or_request_with_http_basic("Application") do |name, password|
-      name == "wataru" && password == "hayawata3626"
-    end
-  end
 end

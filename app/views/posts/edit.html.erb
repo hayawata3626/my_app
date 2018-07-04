@@ -1,12 +1,13 @@
 <div id="postEdit">
-  <edit-component :post="post"></edit-component>
+  <edit-component :post="post" :token="authenticationToken"></edit-component>
 </div>
 
 <script>
   new PostEdit ({
     el: "#postEdit",
     data: {
-      post: <%= raw @post.to_json %>
+      post: <%= raw @post.to_json %>,
+      authenticationToken: '<%= form_authenticity_token %>'
     }
   })
 </script>
