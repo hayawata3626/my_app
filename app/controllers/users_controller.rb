@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user, {only: [:edit, :update, :index, :show]}
-  before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  before_action :ensure_correct_user, {only: [:edit, :update]}
-  protect_from_forgery :except => [:login]
+  # before_action :authenticate_manager, {only: [:edit, :update, :index, :show]}
+  # before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
+  # before_action :ensure_correct_user, {only: [:edit, :update]}
+  # protect_from_forgery :except => [:login]
 
   def index
     @users = User.all
@@ -61,22 +61,22 @@ class UsersController < ApplicationController
     end
   end
 
-  def login_form
-  end
+  # def login_form
+  # end
 
-  def login
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      flash[:notice] = "ログインしました"
-      redirect_to("/")
-    else
-      @error_message = "メールアドレスまたはパスワードが間違っています。"
-      @email = params[:email]
-      @password = params[:password]
-      render("users/login_form")
-    end
-  end
+  # def login
+  #   @user = User.find_by(email: params[:email])
+  #   if @user && @user.authenticate(params[:password])
+  #     session[:user_id] = @user.id
+  #     flash[:notice] = "ログインしました"
+  #     redirect_to("/")
+  #   else
+  #     @error_message = "メールアドレスまたはパスワードが間違っています。"
+  #     @email = params[:email]
+  #     @password = params[:password]
+  #     render("users/login_form")
+  #   end
+  # end
 
   def logout
     session[:user_id] = nil
