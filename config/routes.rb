@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :sessions, only: [:new, :create, :destroy]
+  devise_for :managers
   root "posts#index"
   get "/posts/new" => "posts#new"
   get "/posts/:id" => "posts#show"
