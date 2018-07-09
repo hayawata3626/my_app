@@ -7,25 +7,29 @@
         <li class="post_userInfo_date">{{date}}</li>
       </ul>
     </div>
-    <div class='post_title'>{{post.title}}</div>
-    <div class='post_content'>{{post.content}}</div>
-    <div class='post_operate'>
-      <p class="post_operate_detail">
-        <a :href="'/posts/' + post.id">
-          <i class="fas fa-info-circle"></i>
-        </a>
-      </p>
-      <p class="post_operate_edit">
-        <a :href="'posts/' + post.id+ '/edit'">
-          <i class="fas fa-pencil-alt f303"></i>
-        </a>
-      </p>
-      <p class="post_operate_delete">
-        <a :href="'posts/' + post.id + '/destroy'">
-          <i class="far fa-trash-alt"></i>
-        </a>
-      </p>
-    </div>
+    <a :href="'posts/' + post.id" class="postDetail_link">
+      <div class='post_title'>{{post.title}}</div>
+      <div class='post_content'>{{post.content}}</div>
+    </a>
+    <template v-if="isSignIn">
+      <div class='post_operate'>
+        <p class="post_operate_detail">
+          <a :href="'/posts/' + post.id">
+            <i class="fas fa-info-circle"></i>
+          </a>
+        </p>
+        <p class="post_operate_edit">
+          <a :href="'posts/' + post.id+ '/edit'">
+            <i class="fas fa-pencil-alt f303"></i>
+          </a>
+        </p>
+        <p class="post_operate_delete">
+          <a :href="'posts/' + post.id + '/destroy'">
+            <i class="far fa-trash-alt"></i>
+          </a>
+        </p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -35,30 +39,33 @@ import * as moment from "moment";
 
 @Component
 export default class Post extends Vue {
-  @Prop()
-  public post;
+  @Prop() public post;
 
-  @Prop()
-  public users;
+  @Prop() public users;
+
+  @Prop() public isSignIn: boolean;
 
   private date: string = null;
 
-  created(){
+  created() {
     this.shapeDateFormat(this.post.created_at);
   }
 
   public shapeDateFormat(postDate) {
-    const nonformatDate = moment(postDate)
-    this.date = nonformatDate.format("YYYY/MM/DD HH:mm")
+    const nonformatDate = moment(postDate);
+    this.date = nonformatDate.format("YYYY/MM/DD HH:mm");
   }
 }
-
 </script>
 
 <style scoped>
-
 .post_userWrapper {
   display: flex;
+}
+
+.postDetail_link {
+  text-decoration: none;
+  color: #000;
 }
 
 .post {
@@ -98,7 +105,6 @@ export default class Post extends Vue {
 .post_operate a {
   font-size: 18px;
   color: #249f80;
-
 }
 
 .post_operate_edit {
@@ -111,5 +117,4 @@ export default class Post extends Vue {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 </style>
