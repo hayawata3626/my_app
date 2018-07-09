@@ -20,6 +20,8 @@ gem 'mysql2'
 gem 'hirb'
 gem 'hirb-unicode'
 
+# devise
+gem 'devise'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
