@@ -2,6 +2,7 @@
   <post-component
     :post="post"
     v-for="post in posts"
+    :isSignIn="isSignIn"
     key="post.id">
     </post-component>
   <div v-if="!searchResult">
@@ -9,13 +10,13 @@
     <%= link_to "ブログトップへ", root_path %>
   </div>
 </div>
-
 <script>
 new Posts({
   el: "#vuePosts",
   data: {
     posts: <%= raw @posts.to_json %>,
-    searchResult: <%= @searchResult %>
+    searchResult: <%= @searchResult %>,
+    isSignIn: <%= manager_signed_in? %>
   }
 })
 </script>
