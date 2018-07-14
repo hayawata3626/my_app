@@ -1,10 +1,15 @@
 <div class="posts" id="vuePosts">
+  <% @posts.each do |post| %>
+    <% @tags.push(post.tags) %>
+  <% end %>
+
   <post-component
     :post="post"
     v-for="post in posts"
-    :isSignIn="isSignIn"
+    :is-sign-in="isSignIn"
     key="post.id">
-    </post-component>
+  </post-component>
+
   <div v-if="!searchResult">
     <p>検索条件に合う記事は見つかりません。</p>
     <%= link_to "ブログトップへ", root_path %>
@@ -13,10 +18,16 @@
 <script>
 new Posts({
   el: "#vuePosts",
+  created(){
+    for(let i = 0; i < this.posts.length; i++){
+      this.posts[i]["tags"] = this.tags[i]
+    }
+  },
   data: {
     posts: <%= raw @posts.to_json %>,
     searchResult: <%= @searchResult %>,
-    isSignIn: <%= manager_signed_in? %>
+    isSignIn: <%= manager_signed_in? %>,
+    tags: <%= raw @tags.to_json %>
   }
 })
 </script>

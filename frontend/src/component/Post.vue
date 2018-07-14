@@ -11,6 +11,11 @@
       <div class='post_title'>{{post.title}}</div>
       <div class='post_content'>{{post.content}}</div>
     </a>
+    <div class='tag_area'>
+      <template v-if="post.tags.length" v-for="(tag, index) in post.tags">
+        <span :key="index" class="tag">{{tag.name}}</span>
+      </template>
+    </div>
     <template v-if="isSignIn">
       <div class='post_operate'>
         <p class="post_operate_detail">
@@ -70,6 +75,7 @@ export default class Post extends Vue {
 
 .post {
   font-weight: lighter;
+  width: 48%;
 }
 
 .post_title {
@@ -116,5 +122,13 @@ export default class Post extends Vue {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.tag {
+  background: #4ab3f4;
+  color: #fff;
+  border-radius: 16px;
+  padding: 6px 20px;
+  display: inline-block;
 }
 </style>
