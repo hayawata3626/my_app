@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :create_posts_tags_tables
+  has_many :tags, through: :create_posts_tags_tables
   validates :content, presence: true
   validates :user_id, presence: true
   default_scope -> { order(created_at: :desc) }

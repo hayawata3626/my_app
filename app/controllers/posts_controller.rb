@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.search(params[:search])
+    @tags = [];
     if @posts.blank?
       @searchResult = false;
       return;
