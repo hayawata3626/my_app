@@ -11,6 +11,7 @@
       <div class='post_title'>{{post.title}}</div>
       <div class='post_content'>{{post.content}}</div>
     </a>
+    <p><img :src="'/images/' + post.image_name" alt=''></p>
     <div class='tag_area'>
       <template v-if="post.tags.length" v-for="(tag, index) in post.tags">
         <span :key="index" class="tag">{{tag.name}}</span>
@@ -29,7 +30,7 @@
           </a>
         </p>
         <p class="post_operate_delete">
-          <a :href="'posts/' + post.id + '/destroy'">
+          <a @click="deletePost">
             <i class="far fa-trash-alt"></i>
           </a>
         </p>
@@ -41,6 +42,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import * as moment from "moment";
+import axios from "axios";
 
 @Component
 export default class Post extends Vue {
@@ -56,7 +58,20 @@ export default class Post extends Vue {
     this.shapeDateFormat(this.post.created_at);
   }
 
-  public shapeDateFormat(postDate) {
+  private deletePost(){
+    axios.defaults.headers['X-CSRF-TOKEN'] = document.getElementsByTagName("meta")[1].content
+    // const url = `posts/${this.post.id}/destroy`;
+    axios.post(`posts/${this.post.id}/destroy`, {
+      id: this.post.id
+    }).then(function (response) {
+      // window.location.href=`posts/${this.post.id}/destroy`;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  private shapeDateFormat(postDate) {
     const nonformatDate = moment(postDate);
     this.date = nonformatDate.format("YYYY/MM/DD HH:mm");
   }
@@ -128,7 +143,13 @@ export default class Post extends Vue {
   background: #4ab3f4;
   color: #fff;
   border-radius: 16px;
-  padding: 6px 20px;
+  padding: 6px 15px;
   display: inline-block;
+  font-size: 10px;
+  margin: 10px 0 10px 5px;
+}
+
+span.tag:first-child {
+  margin-left: 0;
 }
 </style>

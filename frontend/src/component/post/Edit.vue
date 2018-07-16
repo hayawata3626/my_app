@@ -1,6 +1,6 @@
 <template>
   <div class='wrapper postEdit'>
-    <form action='/posts' method="post">
+    <form action='/posts' method="post" enctype="multipart/form-data">
      <input
       name="authenticity_token"
       type="hidden"
@@ -25,6 +25,16 @@
           <vue-markdown :source="source" :emoji="true" :html="true" :typographer="true"></vue-markdown>
         </div>
       </div>
+      <p class="tag">
+        <input
+          type='text'
+          class="tag_input"
+          placeholder="タグを入力してください"
+          name="tag_name"
+          v-model="post.tags.name"
+         >
+       </p>
+       <p><input type="file" name="post[image_name]"></p>
       <button class="releaseBtn">公開する</button>
     </form>
   </div>
@@ -129,5 +139,13 @@ code {
 
 .vue-markdown-wrapper h1 {
   border-bottom: 1px solid gainsboro;
+}
+
+.tag {
+  margin-top: 20px;
+}
+
+.tag_input {
+  padding: 10px;
 }
 </style>

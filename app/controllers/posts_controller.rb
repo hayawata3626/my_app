@@ -23,13 +23,27 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(title: params[:post][:title], content: params[:post][:content], user_id: @current_user.id)
-    @post.save
+    @post = Post.new(
+      title: params[:post][:title],
+      content: params[:post][:content],
+      image_name: params[:post][:image_name].original_filename,
+      user_id: current_manager.id
+    )
+    output_path = Rails.root.join('public/images', params[:post][:image_name].original_filename)
+    File.open(output_path, 'w+b') do |fp|
+      fp.write(params["post"]["image_name"].read)
+    end
+
+    tag_list = params[:tag_name].split(",")
+    if @post.save
+      @post.save_posts(tag_list)
+    end
     redirect_to root_path
   end
 
   def edit
     @post = Post.find_by(id:params[:id])
+    @tags = [];
   end
 
   def update

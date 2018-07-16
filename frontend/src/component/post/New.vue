@@ -1,6 +1,6 @@
 <template>
   <div class='wrapper'>
-    <form action='/posts' method="post">
+    <form action='/posts' method="post" enctype="multipart/form-data">
     <input
       name="authenticity_token"
       type="hidden"
@@ -25,6 +25,8 @@
           <vue-markdown :source="source" :emoji="true" :html="true" :typographer="true"></vue-markdown>
         </div>
       </div>
+      <input type="file" name="post[image_name]">
+      <p class="tag"><input type='text' class="tag_input" placeholder="タグを入力してください" name="tag_name"></p>
       <button class="releaseBtn">公開する</button>
     </form>
    </div>
@@ -66,8 +68,8 @@ export default class New extends Vue {
     this.getTagNames(pres);
   }
 
-  public getTagNames(tags){
-    for(let i = 0; i < tags.length; i++) {
+  public getTagNames(tags) {
+    for (let i = 0; i < tags.length; i++) {
       hljs.highlightBlock(tags[i]);
     }
   }
@@ -109,10 +111,10 @@ code {
   font-size: 16px;
   padding: 10px;
   height: 100%;
-  overflow:scroll;
+  overflow: scroll;
 }
 
-.vue-markdown-wrapper, {
+.vue-markdown-wrapper {
   padding: 0;
 }
 
@@ -132,4 +134,11 @@ code {
   border-bottom: 1px solid gainsboro;
 }
 
+.tag {
+  margin-top: 20px;
+}
+
+.tag_input {
+  padding: 10px;
+}
 </style>

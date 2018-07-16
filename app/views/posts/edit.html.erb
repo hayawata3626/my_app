@@ -5,9 +5,13 @@
 <script>
   new PostEdit ({
     el: "#postEdit",
+    created(){
+      this.post["tags"] = this.tags;
+    },
     data: {
       post: <%= raw @post.to_json %>,
-      authenticationToken: '<%= form_authenticity_token %>'
+      authenticationToken: '<%= form_authenticity_token %>',
+      tags: <%= raw @post.tags.to_json %>
     }
   })
 </script>
