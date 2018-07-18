@@ -23,16 +23,28 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(
-      title: params[:post][:title],
-      content: params[:post][:content],
-      image_name: params[:post][:image_name].original_filename,
-      user_id: current_manager.id
-    )
-    output_path = Rails.root.join('public/images', params[:post][:image_name].original_filename)
-    File.open(output_path, 'w+b') do |fp|
-      fp.write(params["post"]["image_name"].read)
+    if params[:post][:image_name].present?
+      @post = Post.new(
+        title: params[:post][:title],
+        content: params[:post][:content],
+        image_name: params[:post][:image_name].original_filename,
+        user_id: current_manager.id
+      )
+    else
+      @post = Post.new(
+        title: params[:post][:title],
+        content: params[:post][:content],
+        image_name: "no-image.png",
+      )
     end
+
+    if params[:post][:image_name].present?
+      output_path = Rails.root.join('public/images', params[:post][:image_name].original_filename)
+      File.open(output_path, 'w+b') do |fp|
+        fp.write(params["post"]["image_name"].read)
+      end
+    end
+   
 
     tag_list = params[:tag_name].split(",")
     if @post.save
