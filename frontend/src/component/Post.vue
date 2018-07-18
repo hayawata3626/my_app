@@ -1,17 +1,18 @@
 <template>
   <div class='post'>
     <div class='post_userWrapper'>
-      <p class="post_userImage"><img src='/images/user_images/default_user.png' alt=''></p>
       <ul class="post_userInfo">
-        <li class="post_userInfo_name">ほげほげ</li>
+        <!-- <li class="post_userInfo_name">ほげほげ</li> -->
         <li class="post_userInfo_date">{{date}}</li>
       </ul>
     </div>
+    <div>
+      <p class="post_thumbnail"><img :src="'/images/' + post.image_name" alt=''></p>
+      <p class="post_userImage"><img src='/images/user_images/22.jpg' alt=''></p>
+    </div>
     <a :href="'posts/' + post.id" class="postDetail_link">
       <div class='post_title'>{{post.title}}</div>
-      <div class='post_content'>{{post.content}}</div>
     </a>
-    <p><img :src="'/images/' + post.image_name" alt=''></p>
     <div class='tag_area'>
       <template v-if="post.tags.length" v-for="(tag, index) in post.tags">
         <span :key="index" class="tag">{{tag.name}}</span>
@@ -58,17 +59,21 @@ export default class Post extends Vue {
     this.shapeDateFormat(this.post.created_at);
   }
 
-  private deletePost(){
-    axios.defaults.headers['X-CSRF-TOKEN'] = document.getElementsByTagName("meta")[1].content
+  private deletePost() {
+    axios.defaults.headers["X-CSRF-TOKEN"] = document.getElementsByTagName(
+      "meta"
+    )[1].content;
     // const url = `posts/${this.post.id}/destroy`;
-    axios.post(`posts/${this.post.id}/destroy`, {
-      id: this.post.id
-    }).then(function (response) {
-      // window.location.href=`posts/${this.post.id}/destroy`;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios
+      .post(`posts/${this.post.id}/destroy`, {
+        id: this.post.id
+      })
+      .then(function(response) {
+        // window.location.href=`posts/${this.post.id}/destroy`;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   private shapeDateFormat(postDate) {
@@ -96,10 +101,8 @@ export default class Post extends Vue {
 .post_title {
   font-weight: bolder;
   font-size: 22px;
-  margin-top: 10px;
 }
 .post_userInfo {
-  margin-left: 10px;
 }
 
 .post_userInfo_name {
@@ -111,12 +114,22 @@ export default class Post extends Vue {
   font-size: 13px;
 }
 
-.post_userImage {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 1px solid #249f80;
+.post_thumbnail {
+  max-height: 100px;
   overflow: hidden;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.post_userImage {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  overflow: hidden;
+  position: relative;
+  top: -20px;
 }
 
 .post_operate {
