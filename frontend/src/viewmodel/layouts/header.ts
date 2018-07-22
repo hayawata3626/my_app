@@ -1,9 +1,9 @@
 import { Vue, Component } from 'vue-property-decorator';
-import SearchForm from "../../component/SearchForm.vue";
+import HeaderNav from "../../component/layouts/Header.vue";
 
 @Component({
   components: {
-    "searchform-component": SearchForm
+    "header-component": HeaderNav
   }
 })
 export default class Header extends Vue {
