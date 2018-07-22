@@ -63,13 +63,12 @@ export default class Post extends Vue {
     axios.defaults.headers["X-CSRF-TOKEN"] = document.getElementsByTagName(
       "meta"
     )[1].content;
-    // const url = `posts/${this.post.id}/destroy`;
     axios
       .post(`posts/${this.post.id}/destroy`, {
         id: this.post.id
       })
       .then(function(response) {
-        // window.location.href=`posts/${this.post.id}/destroy`;
+        window.location.href= "";
       })
       .catch(function(error) {
         console.log(error);
@@ -115,7 +114,7 @@ export default class Post extends Vue {
 }
 
 .post_thumbnail {
-  max-height: 100px;
+  max-height: 200px;
   overflow: hidden;
   margin-top: 10px;
   display: flex;
