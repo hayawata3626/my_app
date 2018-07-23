@@ -1,32 +1,14 @@
 <header class="header" id="header">
-  <div class="header_menu">
-      <div class='user_info'>
-      </div>
-    <% if manager_signed_in? %>
-    <div class="header_menu_inner">
-      <ul class="login_menu">
-        <li><%= link_to("新規登録", posts_new_path) %></li>
-        <li><%= link_to("投稿一覧", root_path) %></li>
-        <li><%= link_to("ログアウト", destroy_manager_session_path, method: :delete)%></li>
-      </ul>
-    <% end %>
-    <%= form_tag root_path, class: "searchForm", :method => 'get' do %>
-      <div class="searchForm_content">
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Search", :title => nil %>
-        <i class="fas fa-search searchIcon"></i>
-      </div>
-    </div>
-    <% end %>
-  </div>
-  <header-component></header-component>
+  <header-component :isSignIn="isSignIn"></header-component>
 </header>
 
 <script>
-
 new Header({
-  el: '#header'
-})
+  el: '#header',
+  data: {
+    isSignIn: <%= manager_signed_in? %>,
+  }
+});
 </script>
 
 
