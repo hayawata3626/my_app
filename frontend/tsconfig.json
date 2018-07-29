@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
     "noImplicitAny": false,
@@ -8,6 +8,7 @@
     "sourceMap": false,
     "importHelpers": true,
     "experimentalDecorators": true,
+    "allowJs": true,
     "emitDecoratorMetadata": true,
     "types": ["reflect-metadata"],
     "lib": [
